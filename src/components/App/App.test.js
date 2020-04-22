@@ -36,7 +36,7 @@ describe('App', () => {
     expect(orders).toHaveLength(3);
   });
 
-  it.only('should be able to render a new order', async () => {
+  it('should be able to render a new order', async () => {
     postOrder.mockResolvedValue(testOrder)
     const { getByPlaceholderText, getByText, getAllByTestId, debug } = renderApp()
     const nameInput = getByPlaceholderText('Name')
