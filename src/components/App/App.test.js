@@ -36,12 +36,14 @@ describe('App', () => {
     expect(orders).toHaveLength(3);
   });
 
-  it('should be able to render a new order', async () => {
+  it.only('should be able to render a new order', async () => {
     postOrder.mockResolvedValue(testOrder)
     const { getByPlaceholderText, getByText, getAllByTestId, debug } = renderApp()
     const nameInput = getByPlaceholderText('Name')
     const ingredients = getAllByTestId('ingredient');
     const submit = getByText('Submit Order')
+    const orders = await waitFor(() => getAllByTestId('order'));
+    expect(orders).toHaveLength(3);
 
 
     fireEvent.change(nameInput, {target: {value: 'Lane'}});
@@ -54,14 +56,13 @@ describe('App', () => {
 
     const order = getByText('Order: beans, lettuce, carnitas, queso fresco, jalapenos')
     expect(order).toBeInTheDocument()
-    debug()
     fireEvent.click(submit)
-    debug()
 
     const newTicket =  await waitFor(() => getByText('Lane'))
-    // const orders = await waitFor(() => getAllByTestId('order'));
-    // expect(orders).toHaveLength(4);
-    // expect(newTicket).toBeInTheDocument()
+    expect(newTicket).toBeInTheDocument()
+    debug()
+    const ordersPlus = await waitFor(() => getAllByTestId('order'));
+    expect(ordersPlus).toHaveLength(4);
   });
 
 })
