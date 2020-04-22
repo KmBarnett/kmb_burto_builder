@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { postOrders } from '../../apiCalls';
+import { postOrder } from '../../apiCalls';
 import { addOrder } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -26,7 +26,7 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    postOrders(this.state)
+    postOrder(this.state)
       .then(data => this.props.addOrder(data))
 
     this.clearInputs();
@@ -42,7 +42,7 @@ class OrderForm extends Component {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
-        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
+        <button  data-testid="ingredient" key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
           {ingredient}
         </button>
       )
