@@ -15,8 +15,9 @@ class OrderForm extends Component {
   }
 
   handleIngredientChange = e => {
+    const { ingredients } = this.state;
     e.preventDefault();
-    this.setState({ingredients: [...this.state.ingredients, e.target.name]});
+    this.setState({ingredients: [...ingredients, e.target.name]});
   }
 
   handleSubmit = e => {
@@ -29,6 +30,8 @@ class OrderForm extends Component {
   }
 
   render() {
+    const { ingredients, name } = this.state;
+    const isFilledOut = ingredients.length && name;
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
@@ -44,15 +47,15 @@ class OrderForm extends Component {
           type='text'
           placeholder='Name'
           name='name'
-          value={this.state.name}
+          value={name}
           onChange={e => this.handleNameChange(e)}
         />
 
         { ingredientButtons }
 
-        <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
+        <p>Order: { ingredients.join(', ') || 'Nothing selected' }</p>
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button disabled={!isFilledOut} onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>
       </form>
