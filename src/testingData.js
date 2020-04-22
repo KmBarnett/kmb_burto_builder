@@ -8,7 +8,7 @@ const testingData = {
         "lettuce",
         "carnitas",
         "queso fresco",
-        "jalapeno"
+        "jalapenos"
       ]
     }, {
       id: 2,
@@ -19,7 +19,7 @@ const testingData = {
         "lettuce",
         "carnitas",
         "queso fresco",
-        "jalapeno"
+        "jalapenos"
       ]
     }, {
       id: 3,
@@ -33,6 +33,17 @@ const testingData = {
       ]
     },
   ],
+  testOrder: {
+    id: 4,
+    name: "Lane",
+    ingredients: [
+      "beans",
+      "lettuce",
+      "carnitas",
+      "queso fresco",
+      "jalapenos"
+    ]
+  }
 }
 
 export default testingData
