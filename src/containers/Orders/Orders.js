@@ -6,10 +6,13 @@ import { getOrders } from '../../apiCalls';
 
 class Orders extends Component {
 
-  componentDidMount() {
-    getOrders()
-      .then(data => this.props.setOrders(data.orders))
-      .catch(err => console.error('Error fetching:', err));
+  async componentDidMount() {
+    try {
+      const data = await getOrders()
+        this.props.setOrders(data.orders)
+    } catch (err) {
+      console.error('Error fetching:', err)
+    } 
   }
 
   createOrderEls = () => {
