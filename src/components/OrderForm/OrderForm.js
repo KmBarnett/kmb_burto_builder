@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { postOrders } from '../../apiCalls';
+import { addOrder } from '../../actions';
+import { connect } from 'react-redux';
+
 
 class OrderForm extends Component {
   constructor(props) {
@@ -22,6 +26,9 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    postOrders(this.state)
+      .then(data => this.props.addOrder(data))
+
     this.clearInputs();
   }
 
@@ -63,4 +70,10 @@ class OrderForm extends Component {
   }
 }
 
-export default OrderForm;
+const mapDispatchToProps = dispatch => (
+  {
+    addOrder: (order) => dispatch(addOrder(order))
+  }
+);
+
+export default connect(null, mapDispatchToProps)(OrderForm);
