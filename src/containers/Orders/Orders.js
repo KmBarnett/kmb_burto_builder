@@ -30,7 +30,7 @@ class Orders extends Component {
               return <li key={ingredient}>{ingredient}</li>
             })}
           </ul>
-          <button onClick={this.deleteOrder()}>x</button>
+          <button onClick={() => this.deleteOrder(order.id)}>x</button>
         </div>
       )
     });
