@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Orders.css';
 import { connect } from 'react-redux';
-import { setOrders } from '../../actions';
-import { getOrders } from '../../apiCalls';
+import { setOrders, removeOrder } from '../../actions';
+import { getOrders, deleteOrder } from '../../apiCalls';
 
 class Orders extends Component {
 
@@ -15,6 +15,11 @@ class Orders extends Component {
     }
   }
 
+  deleteOrder = (id) => {
+      deleteOrder(id)
+      this.props.removeOrder(id)
+  }
+
   createOrderEls = () => {
     return this.props.orders.map(order => {
       return (
@@ -25,6 +30,7 @@ class Orders extends Component {
               return <li key={ingredient}>{ingredient}</li>
             })}
           </ul>
+          <button onClick={this.deleteOrder()}>x</button>
         </div>
       )
     });
@@ -44,7 +50,8 @@ const mapStateToProps = ({ orders }) => ({
 
 const mapDispatchToProps = dispatch => (
   {
-    setOrders: (orders) => dispatch(setOrders(orders))
+    setOrders: (orders) => dispatch(setOrders(orders)),
+    removeOrder: (id) => dispatch(removeOrder(id)),
   }
 );
 

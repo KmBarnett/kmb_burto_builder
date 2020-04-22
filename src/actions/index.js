@@ -7,3 +7,8 @@ export const addOrder = order => ({
   type: 'ADD_ORDER',
   order
 });
+
+export const removeOrder = id => ({
+  type: 'REMOVE_ORDER',
+  id
+});

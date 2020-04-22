@@ -14,3 +14,14 @@ export const postOrder = async (order) => {
   const response = await fetch('http://localhost:3001/api/v1/orders', options)
   return await response.json()
 }
+
+export const deleteOrder = async (id) => {
+  const options = {
+    method: 'DELETE',
+    headers: {
+            'Content-Type': 'application/json'
+           },
+  }
+  const response = await fetch(`http://localhost:3001/api/v1/orders/${id}`, options)
+  return await response.json()
+}
