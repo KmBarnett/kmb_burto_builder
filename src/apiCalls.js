@@ -3,7 +3,7 @@ export const getOrders = async () => {
   return await response.json()
 }
 
-export const postOrders = async (order) => {
+export const postOrder = async (order) => {
   const options = {
     method: 'POST',
     headers: {
